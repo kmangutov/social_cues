@@ -2,14 +2,14 @@
 
 //this person is ____ who is _____
 var arrSocialCues = [
-  ['an expert', 'in the target audience'],
-  ['a non-expert', 'in the target audience'],
-  ['an expert', 'not in the target audience'],
-  ['a non-expert', 'not in the target audience']
+  ['a design expert', 'in the target audience'],
+  ['not a design expert', 'in the target audience'],
+  ['a design expert', 'not in the target audience'],
+  ['not a design expert', 'not in the target audience']
 ]
 
 var arrFeedbacks1 = [
-  'The color scheme and imagery used is good. In particular, the sharp purple cut-out is eye-catching. I would suggest finding a better font or re-arranging the information on the left in a more visually-appealing way, it’s currently underwhelming. Perhaps take out \“TIME/PLACE\” and instead just list the dates/location and space it out a little bit better (left-justified, maybe). Also the tag-line should be reformatted so it’s not in one block on the left. Try to make better use of the space!',
+  'The color scheme and imagery used is good. In particular, the sharp purple cut-out is eye-catching. I would suggest finding a better font or re-arranging the information on the left in a more visually-appealing way, it\'s currently underwhelming. Perhaps take out "TIME/PLACE" and instead just list the dates/location and space it out a little bit better (left-justified, maybe). Also the tag-line should be reformatted so it\'s not in one block on the left. Try to make better use of the space!',
   'The two people dancing are not filled in all the way. There are white patches by the edges that could be easily fixed and it would look much nicer.',
   'I think you should state what kind of dancing will be in this event. And perhaps what to wear. I would also change the design of the purple character, it looks a bit off against the black background. I would probably put a real live dancing event photo on the background of this poster and change the font of the words on this poster.',
   'I think the purple really pops and makes you look at the poster. I found myself looking for a price. Maybe the cost, if there is one, could be listed in small print on the bottom left corner. I liked the font but wondered if there is a font that \“flows\” kind of like dance? This font is bold, which stands out well, but I am wondering if there would be a bold font that represented dance more.',
@@ -38,10 +38,41 @@ var getRandomInt = function(min, max) {
 var populateFeedbacks = function() {
 
   var divFeedbacks = $('#divFeedbacks');
-  divFeedbacks.html('<h1>hello world</h1>');
+
   var generateFeedbackForm = function(feedbackId) {
-    
-  } 
+
+    var html = "<tr><td>" + arrFeedbacks1[feedbackId] + "</td><td width=300>";
+
+    // usefulness
+    html += "<fieldset><span class='prompt'>How useful is this feedback?</span><br><br>";
+    html += "<span class='info'>1 - Not very useful, 5 - Very useful</span><br><br>"
+    for(var i = 0; i < 5; i++) {
+      html += "<label>" + (i + 1) + "&nbsp;<input type='radio' /></label>";
+    }
+    html += "</fieldset>";
+
+    //confidence
+    html += "<fieldset><span class='prompt'>How confident are you in your rating?</span><br><br>";
+    html += "<span class='info'>1 - Not very confident, 5 - Very confident</span><br><br>"
+    for(var i = 0; i < 5; i++) {
+      html += "<label>" + (i + 1) + "&nbsp;<input type='radio' /></label>";
+    }
+    html += "</fieldset>";
+
+    //rationale
+    html += "<fieldset><span class='prompt'>What is the rationale behind your rating?</span><br><br>";
+    html += "<textarea rows=10 cols=25></textarea>"
+    html += "</fieldset>";   
+
+    html += "</td></tr>";
+    return html;
+  }
+
+  for(var i = 0; i < arrFeedbacks1.length; i++) {
+    var cur = divFeedbacks.html();
+    divFeedbacks.html(cur + generateFeedbackForm(i)); 
+    console.log(cur + ", " + generateFeedbackForm(i));
+  }
 }
 
 
