@@ -1,0 +1,15 @@
+
+.title {
+  text-align: center !important;
+  margin: 25px;
+}
+
+#imgTargetDesign {
+  display: block;
+  margin: 0 auto;
+}
+
+#textDesignContext {
+  margin: 40px 0px;
+  font-size: 20px !important;
+}
