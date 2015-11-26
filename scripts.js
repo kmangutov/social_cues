@@ -41,13 +41,13 @@ var populateFeedbacks = function() {
 
   var generateFeedbackForm = function(feedbackId) {
 
-    var html = "<tr><td>" + arrFeedbacks1[feedbackId] + "</td><td width=300>";
+    var html = "<tr><td><p class='textFeedback'>" + arrFeedbacks1[feedbackId] + "</p></td><td width=300>";
 
     // usefulness
     html += "<fieldset><span class='prompt'>How useful is this feedback?</span><br><br>";
     html += "<span class='info'>1 - Not very useful, 5 - Very useful</span><br><br>"
     for(var i = 0; i < 5; i++) {
-      html += "<label>" + (i + 1) + "&nbsp;<input type='radio' /></label>";
+      html += "<label>" + (i + 1) + "&nbsp;<input type='radio' name='rating" + feedbackId + "' value='" + (i + 1) + "'/></label>";
     }
     html += "</fieldset>";
 
@@ -55,13 +55,13 @@ var populateFeedbacks = function() {
     html += "<fieldset><span class='prompt'>How confident are you in your rating?</span><br><br>";
     html += "<span class='info'>1 - Not very confident, 5 - Very confident</span><br><br>"
     for(var i = 0; i < 5; i++) {
-      html += "<label>" + (i + 1) + "&nbsp;<input type='radio' /></label>";
+      html += "<label>" + (i + 1) + "&nbsp;<input type='radio' name='confidence" + feedbackId + "' value='" + (i + 1) + "'/></label>";
     }
     html += "</fieldset>";
 
     //rationale
-    html += "<fieldset><span class='prompt'>What is the rationale behind your rating?</span><br><br>";
-    html += "<textarea rows=10 cols=25></textarea>"
+    html += "<fieldset><span class='prompt'>What is your rationale behind your rating for feedback usefulness and rating confidence?</span><br><br>";
+    html += "<textarea rows=10 cols=25 name='rationale" + feedbackId + "'></textarea>"
     html += "</fieldset>";   
 
     html += "</td></tr>";
@@ -82,5 +82,6 @@ $(document).ready(function(){
   
   console.log(condition);
   $('#textSocialCue').html(generateSocialCueText(condition));
+  $('#hiddenCondition').val(condition);
   populateFeedbacks();
 });
